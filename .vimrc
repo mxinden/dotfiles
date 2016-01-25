@@ -1,7 +1,3 @@
-"Installation for Pathogen
-execute pathogen#infect()
-filetype plugin indent on
-
 "Install plugins with VimPlug
 call plug#begin('~/.vim/plugged') 
 Plug 'christoomey/vim-tmux-navigator'
@@ -9,6 +5,7 @@ Plug 'altercation/vim-colors-solarized'
 Plug 'bling/vim-airline'
 Plug 'groenewege/vim-less'
 Plug 'edkolev/tmuxline.vim'
+Plug 'flazz/vim-colorschemes'
 call plug#end()
 
 " Activate relative line numbers on the left + absolut number for current line
@@ -37,18 +34,16 @@ let g:airline#extensions#tabline#enabled = 1
 
 " Switch syntax highlighting on, when the terminal has colors
 " Also switch on highlighting the last used search pattern.
-if &t_Co > 2 || has("gui_running")
-  syntax on
-  set background=dark
-  colorscheme solarized
-  let g:solarized_termcolors=256
-  set hlsearch
-endif
+set t_Co=256
+colorscheme hybrid
+set background=light
+set hlsearch
+syntax on
+
 
 " Set color column on .js .html and .less files 
 " to help restrict length of line
 autocmd FileType javascript,html,less setlocal colorcolumn=80
-
 
 "##################################################################################
 
