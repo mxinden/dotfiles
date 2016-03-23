@@ -6,6 +6,13 @@ Plug 'bling/vim-airline'
 Plug 'groenewege/vim-less'
 Plug 'edkolev/tmuxline.vim'
 Plug 'flazz/vim-colorschemes'
+" Markdown extensions
+Plug 'godlygeek/tabular'
+Plug 'plasticboy/vim-markdown'
+Plug 'kchmck/vim-coffee-script'
+Plug 'ctrlpvim/ctrlp.vim'
+" HTML Handlebars support
+Plug 'mustache/vim-mustache-handlebars'
 call plug#end()
 
 " Activate relative line numbers on the left + absolut number for current line
@@ -35,15 +42,24 @@ let g:airline#extensions#tabline#enabled = 1
 " Switch syntax highlighting on, when the terminal has colors
 " Also switch on highlighting the last used search pattern.
 set t_Co=256
-colorscheme hybrid
+" colorscheme hybrid
+colorscheme solarized
 set background=light
 set hlsearch
 syntax on
 
-
 " Set color column on .js .html and .less files 
 " to help restrict length of line
-autocmd FileType javascript,html,less setlocal colorcolumn=80
+autocmd FileType javascript,html,less,coffee setlocal colorcolumn=100
+
+" Activate folding for coffee script files
+autocmd BufNewFile,BufReadPost *.coffee setl foldmethod=indent nofoldenable
+
+" associate *.lessimport with less filetype
+au BufRead,BufNewFile *.lessimport set filetype=less
+
+" On Markdown file: Enable TOC to autofit
+let g:vim_markdown_toc_autofit = 1
 
 "##################################################################################
 
