@@ -13,6 +13,8 @@ Plug 'kchmck/vim-coffee-script'
 Plug 'ctrlpvim/ctrlp.vim'
 " HTML Handlebars support
 Plug 'mustache/vim-mustache-handlebars'
+Plug 'scrooloose/syntastic'
+Plug 'matze/vim-tex-fold'
 call plug#end()
 
 " Activate relative line numbers on the left + absolut number for current line
@@ -60,6 +62,16 @@ au BufRead,BufNewFile *.lessimport set filetype=less
 
 " On Markdown file: Enable TOC to autofit
 let g:vim_markdown_toc_autofit = 1
+
+"Syntastic options
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
 
 "##################################################################################
 
