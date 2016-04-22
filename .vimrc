@@ -15,6 +15,8 @@ Plug 'ctrlpvim/ctrlp.vim'
 Plug 'mustache/vim-mustache-handlebars'
 Plug 'scrooloose/syntastic'
 Plug 'matze/vim-tex-fold'
+Plug 'mxw/vim-jsx'
+Plug 'pangloss/vim-javascript'
 call plug#end()
 
 " Activate relative line numbers on the left + absolut number for current line
@@ -72,6 +74,8 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
+let g:syntastic_javascript_checkers = ['eslint']
+
 
 "##################################################################################
 
