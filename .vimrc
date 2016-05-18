@@ -2,7 +2,8 @@
 call plug#begin('~/.vim/plugged') 
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'altercation/vim-colors-solarized'
-Plug 'bling/vim-airline'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 Plug 'groenewege/vim-less'
 Plug 'edkolev/tmuxline.vim'
 Plug 'flazz/vim-colorschemes'
@@ -17,6 +18,8 @@ Plug 'scrooloose/syntastic'
 Plug 'matze/vim-tex-fold'
 Plug 'mxw/vim-jsx'
 Plug 'pangloss/vim-javascript'
+Plug 'StanAngeloff/php.vim'
+Plug 'rust-lang/rust.vim'
 call plug#end()
 
 " Activate relative line numbers on the left + absolut number for current line
@@ -42,12 +45,14 @@ set ic is hls
 set laststatus=2
 " Enable smarter tab line
 let g:airline#extensions#tabline#enabled = 1
+" Add theme to airline
+let g:airline_theme='sol'
 
 " Switch syntax highlighting on, when the terminal has colors
 " Also switch on highlighting the last used search pattern.
 set t_Co=256
 " colorscheme hybrid
-colorscheme solarized
+colorscheme pyte
 set background=light
 set hlsearch
 syntax on
