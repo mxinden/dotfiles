@@ -16,10 +16,10 @@ Plug 'ctrlpvim/ctrlp.vim'
 Plug 'mustache/vim-mustache-handlebars'
 Plug 'scrooloose/syntastic'
 Plug 'matze/vim-tex-fold'
-Plug 'mxw/vim-jsx'
 Plug 'pangloss/vim-javascript'
 Plug 'StanAngeloff/php.vim'
 Plug 'rust-lang/rust.vim'
+Plug 'mxw/vim-jsx'
 call plug#end()
 
 " Activate relative line numbers on the left + absolut number for current line
