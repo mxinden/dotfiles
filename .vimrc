@@ -15,7 +15,6 @@ Plug 'ctrlpvim/ctrlp.vim'
 " HTML Handlebars support
 Plug 'mustache/vim-mustache-handlebars'
 Plug 'scrooloose/syntastic'
-Plug 'matze/vim-tex-fold'
 Plug 'pangloss/vim-javascript'
 Plug 'StanAngeloff/php.vim'
 Plug 'rust-lang/rust.vim'
