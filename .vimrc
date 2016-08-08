@@ -19,6 +19,7 @@ Plug 'pangloss/vim-javascript'
 Plug 'StanAngeloff/php.vim'
 Plug 'rust-lang/rust.vim'
 Plug 'mxw/vim-jsx'
+Plug 'freitass/todo.txt-vim'
 call plug#end()
 
 " Activate relative line numbers on the left + absolut number for current line
