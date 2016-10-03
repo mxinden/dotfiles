@@ -51,9 +51,6 @@ let g:airline_theme='sol'
 " Switch syntax highlighting on, when the terminal has colors
 " Also switch on highlighting the last used search pattern.
 set t_Co=256
-" colorscheme hybrid
-colorscheme pyte
-set background=light
 set hlsearch
 syntax on
 
