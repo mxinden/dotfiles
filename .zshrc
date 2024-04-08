@@ -115,6 +115,7 @@ PATH=/home/mxinden/.cabal/bin:$PATH
 
 # mxinden: Golang
 PATH=$PATH:/usr/local/go/bin
+PATH=$PATH:$(go env GOPATH)/bin
 
 # mxinden: Deno
 PATH=/home/mxinden/.deno/bin/deno:$PATH
