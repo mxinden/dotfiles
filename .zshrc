@@ -181,3 +181,6 @@ PROMPT=$PROMPT'%{$(vterm_prompt_end)%}'
 
 # </mxinden: vterm and zsh>
 
+# mxinden: Building Firefox, using cinnabar.
+export PATH="/home/mxinden/.mozbuild/git-cinnabar:$PATH"
+
