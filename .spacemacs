@@ -38,7 +38,6 @@ This function should only modify configuration layer settings."
      ;; protobuf
      auto-completion
      ;; javascript
-     git
      python
      ;; haskell
      ;; (go :variables go-backend 'lsp)
@@ -66,16 +65,9 @@ This function should only modify configuration layer settings."
      markdown
      ;; multiple-cursors
      org
-     (shell :variables
-            shell-default-shell 'multi-vterm
-            shell-default-term-shell "/bin/zsh"
-            shell-default-height 30
-            shell-default-position 'bottom)
      ;; spell-checking
      ;; syntax-checking
      ;; version-control
-     emoji
-     treemacs
      ;; terraform
      themes-megapack
      ;; (plantuml :variables plantuml-jar-path "/usr/share/plantuml/plantuml.jar" org-plantuml-jar-path "/usr/share/plantuml/plantuml.jar")
@@ -91,12 +83,7 @@ This function should only modify configuration layer settings."
    ;; `dotspacemacs/user-config'. To use a local version of a package, use the
    ;; `:location' property: '(your-package :location "~/path/to/your-package/")
    ;; Also include the dependencies as they will not be resolved automatically.
-   dotspacemacs-additional-packages
-   '(
-     ;; mxinden: Enable magit to push via ssh.
-     exec-path-from-shell
-     ;; mxinden: Required by magit.
-     sqlite3)
+   dotspacemacs-additional-packages '(mixed-pitch org-modern)
 
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
@@ -493,7 +480,7 @@ It should only modify the values of Spacemacs settings."
    ;; List of search tool executable names. Spacemacs uses the first installed
    ;; tool of the list. Supported tools are `rg', `ag', `pt', `ack' and `grep'.
    ;; (default '("rg" "ag" "pt" "ack" "grep"))
-   dotspacemacs-search-tools '("rg" "ag" "pt" "ack" "grep")
+   dotspacemacs-search-tools '("rg" "ag" "ack" "grep")
 
    ;; Format specification for setting the frame title.
    ;; %a - the `abbreviated-file-name', or `buffer-name'
@@ -597,26 +584,30 @@ configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
 
-  (add-hook 'rust-mode-hook 'editorconfig-apply)
-
-  ;; mxinden: Whether to show word-granularity differences within diff hunks.
-  ;; https://magit.vc/manual/magit/Diff-Options.html
-  (setq magit-diff-refine-hunk 'all)
-
-  ;; mxinden: Enable magit to push via ssh.
-  (require 'exec-path-from-shell)
-  (exec-path-from-shell-copy-env "SSH_AGENT_PID")
-  (exec-path-from-shell-copy-env "SSH_AUTH_SOCK")
-
-  ;; mxinden: cargo fmt on save.
-  (setq rustic-format-on-save t)
-
   (use-package org
     :config
     ;; mxinden: Properly indent when opening a new task.
     (setq org-startup-indented t)
     ;; mxinden: Wrap lines
     (add-hook 'org-mode-hook #'visual-line-mode)
+    ;; Proportional fonts for prose, monospace for code/tables
+    (add-hook 'org-mode-hook #'mixed-pitch-mode)
+    ;; Modern org-mode visuals (bullets, tags, tables)
+    (add-hook 'org-mode-hook #'org-modern-mode)
+    (add-hook 'org-agenda-finalize-hook #'org-modern-agenda)
+    ;; org-modern tweaks
+    (setq org-modern-todo nil              ;; no boxes around TODO/DONE
+          org-modern-tag nil               ;; no boxes around tags
+          org-modern-timestamp nil          ;; no boxes around dates
+          org-modern-star '("◉" "○" "◈" "◇" "▸")  ;; cleaner bullets
+          org-modern-list '((?+ . "◦") (?- . "–") (?* . "•"))  ;; prettier lists
+          org-modern-checkbox '((?X . "☑") (?- . "□–") (?\s . "□"))
+          org-modern-table t               ;; prettier tables
+          org-modern-block-fringe 2)       ;; fringe border on src blocks
+    ;; Recommended org settings for org-modern
+    (setq org-hide-emphasis-markers t      ;; hide *bold* markers, show bold
+          org-pretty-entities t            ;; render \alpha as α etc.
+          org-ellipsis "…")
     ;; mxinden: Capture templates.
     (setq org-capture-templates
           '(("t" "Todo" entry (file+headline "~/Nextcloud/org-mode/main.org" "Tasks")
@@ -640,20 +631,6 @@ before packages are loaded."
    '(org-level-7 ((t (:inherit outline-7 :height 1.0))))
    '(org-level-8 ((t (:inherit outline-8 :height 1.0))))
    )
-
-  ;; Needed for development on https://github.com/mozilla/neqo
-  (setenv "NSS_DIR" "/home/mxinden/code/github.com/mozilla/neqo/nss")
-  (setenv "LD_LIBRARY_PATH" "$(dirname \"$(find . -name libssl3.so -print | head -1)\")")
-
-  ;; Ignore specific directories and files
-  ;; (setq projectile-globally-ignored-directories '("node_modules" "build" "dist" "out" "third_party" "obj-x86_64-pc-linux-gnu" ".git"))
-  ;; (setq projectile-globally-ignored-files '("*.log" "*.tmp"))
-  ;; Enable projectile caching
-  ;; (setq projectile-enable-caching t)
-  ;; Use the native indexing method for better performance
-  ;; (setq projectile-indexing-method 'alien)
-  ;; Use fd or ripgrep for faster file listing
-  ;; (setq projectile-generic-command "rg --files --follow --no-ignore-vcs --hidden")
 
   ;; Fuzzy search for SPACE-b-b.
   (setq helm-buffers-fuzzy-matching t
